@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: ./src
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src
+      - /src/node_modules
+    environment:
+      - NODE_ENV=production
+    command: ["serve", "-s", "build", "-l", "3000"]
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./Comp3123_101356043_assignment2_backend:/backend
+      - /backend/node_modules
+    environment:
+      - NODE_ENV=production
